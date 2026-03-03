@@ -1,0 +1,14 @@
+{
+  "subjects": [
+    {
+      "name": "Algoritmos",
+      "study_sessions": [
+        {
+          "date": "2026-03-03",
+          "minutes": 90,
+          "difficulty": 4
+        }
+      ]
+    }
+  ]
+}
