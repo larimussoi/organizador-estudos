@@ -1,8 +1,8 @@
 from datetime import datetime
 
 class StudySession:
-    def __init__(self, minutes, difficulty):
-        self.date = datetime.now().strftime("%Y-%m-%d")
+    def __init__(self, minutes, difficulty, date=None):
+        self.date = date if date else datetime.now().strftime("%Y-%m-%d")
         self.minutes = minutes
         self.difficulty = difficulty
 
