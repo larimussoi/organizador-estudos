@@ -1,8 +1,9 @@
 import tkinter as tk
 from tkinter import messagebox
+from data_manager import load_data, save_data
 from models import Subject
 
-subjects = []
+subjects = load_data()
 
 def add_subject():
     name = subject_entry.get()
@@ -10,6 +11,7 @@ def add_subject():
         subjects.append(Subject(name))
         listbox.insert(tk.END, name)
         subject_entry.delete(0, tk.END)
+        save_data(subjects)
 
 root = tk.Tk()
 root.title("Organizador de Estudos")
@@ -26,6 +28,9 @@ btn_add.pack()
 
 listbox = tk.Listbox(root)
 listbox.pack(fill=tk.BOTH, expand=True)
+
+for subject in subjects:
+    listbox.insert(tk.END, subject.name)
 
 def open_register_window():
     selected_index = listbox.curselection()
@@ -57,6 +62,7 @@ def open_register_window():
                 raise ValueError
 
             subject.add_session(minutes, difficulty)
+            save_data(subjects)
 
             messagebox.showinfo("Sucesso", "Sessão registrada!")
             popup.destroy()
