@@ -12,10 +12,10 @@ def add_subject():
         subject_entry.delete(0, tk.END)
 
 root = tk.Tk()
-root.title("Study Tracker")
+root.title("Organizador de Estudos")
 root.geometry("400x300")
 
-label = tk.Label(root, text="Enter Subject:")
+label = tk.Label(root, text="Insira a matéria: ")
 label.pack()
 
 subject_entry = tk.Entry(root)
@@ -68,5 +68,42 @@ def open_register_window():
 
 btn_register = tk.Button(root, text="Registrar Estudo", command=open_register_window)
 btn_register.pack(pady=10)
+
+def show_summary():
+    selected_index = listbox.curselection()
+    
+    if not selected_index:
+        messagebox.showwarning("Aviso", "Selecione uma matéria primeiro.")
+        return
+    
+    subject = subjects[selected_index[0]]
+    
+    total_minutes = subject.total_minutes()
+    average_difficulty = subject.average_difficulty()
+    total_sessions = len(subject.study_sessions)
+
+    if total_sessions == 0:
+        messagebox.showinfo("Resumo", f"Matéria: {subject.name}\nNenhuma sessão registrada.")
+        return
+
+    if average_difficulty >= 4:
+        insight = "Dificuldade alta, considere revisar os conceitos."
+    elif average_difficulty <= 2:
+        insight = "Dificuldade baixa, continue assim!"
+    else:
+        insight = "Dificuldade moderada, mantenha o bom trabalho."
+
+    summary_text = (
+        f"Matéria: {subject.name}\n"
+        f"Total de Sessões: {total_sessions}\n"
+        f"Total de Minutos: {total_minutes}\n"
+        f"Dificuldade Média: {average_difficulty:.2f}\n"
+        f"Insight: {insight}"
+    )
+
+    messagebox.showinfo("Resumo", summary_text)
+
+btn_summary = tk.Button(root, text="Ver Resumo da Matéria", command=show_summary)
+btn_summary.pack(pady=5)
 
 root.mainloop()
