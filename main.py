@@ -13,7 +13,7 @@ def add_subject():
 
 root = tk.Tk()
 root.title("Organizador de Estudos")
-root.geometry("400x300")
+root.geometry("400x500")
 
 label = tk.Label(root, text="Insira a matéria: ")
 label.pack()
@@ -105,5 +105,40 @@ def show_summary():
 
 btn_summary = tk.Button(root, text="Ver Resumo da Matéria", command=show_summary)
 btn_summary.pack(pady=5)
+
+def weekly_suggestion():
+    if not subjects:
+        messagebox.showinfo("Sugestão", "Nenhuma matéria cadastrada.")
+        return
+    
+    prioritized = sorted(subjects, key=calculate_priority, reverse=True)
+    top_subject = prioritized[0]
+    
+    total_minutes = top_subject.total_minutes()
+    avg_difficulty = top_subject.average_difficulty()
+    
+    suggestion_text = (
+        f"Matéria recomendada:\n\n"
+        f"{top_subject.name}\n\n"
+        f"Total estudado: {total_minutes} minutos\n"
+        f"Dificuldade média: {avg_difficulty:.2f}\n\n"
+        f"Motivo: Alta dificuldade ou pouco tempo investido."
+    )
+    
+    messagebox.showinfo("Sugestão da Semana", suggestion_text)
+
+def calculate_priority(subject):
+    total_minutes = subject.total_minutes()
+    avg_difficulty = subject.average_difficulty()
+    
+    if total_minutes == 0:
+        return 999  
+    
+    score = (avg_difficulty * 2) + (1 / (total_minutes + 1)) * 100
+    return score   
+
+btn_suggestion = tk.Button(root, text="Sugestão da Semana", command=weekly_suggestion)
+btn_suggestion.pack(pady=5)
+
 
 root.mainloop()
