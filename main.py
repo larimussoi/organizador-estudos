@@ -146,5 +146,4 @@ def calculate_priority(subject):
 btn_suggestion = tk.Button(root, text="Sugestão da Semana", command=weekly_suggestion)
 btn_suggestion.pack(pady=5)
 
-
 root.mainloop()
