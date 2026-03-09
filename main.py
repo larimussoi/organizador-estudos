@@ -16,18 +16,50 @@ def add_subject():
 root = tk.Tk()
 root.title("Organizador de Estudos")
 root.geometry("400x500")
+root.configure(bg="#f4f6f9") 
 
-label = tk.Label(root, text="Insira a matéria: ")
-label.pack()
+label = tk.Label(
+    root,
+    text="Insira a matéria:",
+    bg="#f4f6f9",
+    font=("Segoe UI", 12)
+)
+label.pack(pady=10)
 
-subject_entry = tk.Entry(root)
-subject_entry.pack()
+subject_entry = tk.Entry(
+    root,
+    font=("Segoe UI", 11),
+    relief="solid",
+    bd=1
+)
+subject_entry.pack(pady=5)
 
-btn_add = tk.Button(root, text="Adicionar", command=add_subject)
-btn_add.pack()
+btn_add = tk.Button(
+    root,
+    text="Adicionar",
+    command=add_subject,
+    bg="#85B9FC",
+    fg="white",
+    font=("Segoe UI", 10, "bold"),
+    relief="flat",
+    padx=8,
+    pady=2)
+btn_add.pack(pady=5)
 
-listbox = tk.Listbox(root)
-listbox.pack(fill=tk.BOTH, expand=True)
+listbox = tk.Listbox(
+    root,
+    font=("Segoe UI", 11),
+    bg="white",
+    fg="#333333",
+    selectbackground="#85B9FC",
+    selectforeground="white",
+    relief="flat",
+    bd=0,
+    highlightthickness=1,
+    highlightcolor="#dddddd",
+    activestyle="none"
+)
+listbox.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
 
 for subject in subjects:
     listbox.insert(tk.END, subject.name)
@@ -72,8 +104,13 @@ def open_register_window():
 
     tk.Button(popup, text="Salvar", command=save_session).pack(pady=15)
 
-btn_register = tk.Button(root, text="Registrar Estudo", command=open_register_window)
-btn_register.pack(pady=10)
+btn_register = tk.Button(root, text="Registrar Estudo", command=open_register_window, bg="#85B9FC",
+    fg="white",
+    font=("Segoe UI", 10, "bold"),
+    relief="flat",
+    padx=8,
+    pady=2)
+btn_register.pack(pady=5)
 
 def show_summary():
     selected_index = listbox.curselection()
@@ -109,7 +146,12 @@ def show_summary():
 
     messagebox.showinfo("Resumo", summary_text)
 
-btn_summary = tk.Button(root, text="Ver Resumo da Matéria", command=show_summary)
+btn_summary = tk.Button(root, text="Ver Resumo da Matéria", command=show_summary, bg="#85B9FC",
+    fg="white",
+    font=("Segoe UI", 10, "bold"),
+    relief="flat",
+    padx=8,
+    pady=2)
 btn_summary.pack(pady=5)
 
 def weekly_suggestion():
@@ -143,7 +185,12 @@ def calculate_priority(subject):
     score = (avg_difficulty * 2) + (1 / (total_minutes + 1)) * 100
     return score   
 
-btn_suggestion = tk.Button(root, text="Sugestão da Semana", command=weekly_suggestion)
+btn_suggestion = tk.Button(root, text="Sugestão da Semana", command=weekly_suggestion, bg="#85B9FC",
+    fg="white",
+    font=("Segoe UI", 10, "bold"),
+    relief="flat",
+    padx=8,
+    pady=2)
 btn_suggestion.pack(pady=5)
 
 root.mainloop()

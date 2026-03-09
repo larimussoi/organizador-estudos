@@ -13,5 +13,15 @@
                 "difficulty": 1
             }
         ]
+    },
+    {
+        "name": "Python",
+        "study_sessions": [
+            {
+                "date": "2026-03-09",
+                "minutes": 5,
+                "difficulty": 4
+            }
+        ]
     }
 ]
